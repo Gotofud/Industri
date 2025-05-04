@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +23,8 @@ use App\Http\Controllers\HomeController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\ArtikelController::class, 'index'])->name('welcome');
-Route::resource('/home', HomeController::class);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
+Route::get('/dashboard', [MainController::class, 'index'])->name('dashboard');
+Route::resource('berita', ArtikelController::class);
+Route::get('/tampilan/{id}', [ArtikelController::class, 'read'])->name('berita.read');
+Route::resource('kategori', KategoriController::class);

@@ -5,17 +5,17 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{route('dashboard')}}" class="nav-link text-white">
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{route('berita.index')}}" class="nav-link text-white">
                         Berita
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{ route('kategori.index') }}" class="nav-link text-white">
                         Kategori
                     </a>
 

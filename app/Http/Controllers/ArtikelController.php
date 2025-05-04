@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artikel;
+use App\Models\Kategori;
 
 class ArtikelController extends Controller
 {
@@ -15,8 +16,10 @@ class ArtikelController extends Controller
     public function index()
     {
         $berita = Artikel::all();
+        $kategori = Kategori::all();
         $artikel = Artikel::take(2)->get();
-        return view('welcome', compact('berita', 'artikel'));
+        $utama = Artikel::take(1)->get();
+        return view('berita.index', compact('berita', 'artikel','utama','kategori'));
     }
 
     /**
@@ -26,7 +29,8 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Kategori::all();
+        return view('berita.create', compact('kategori'));
     }
 
     /**
@@ -52,7 +56,7 @@ class ArtikelController extends Controller
             $berita->id_kategori = $request->id_kategori;
     
             if ($request->hasFile('cover')) {
-                $berita->deletecover();
+                $berita->deleteImage();
                 $img = $request->file('cover');
                 $name = rand(1000, 9999) . '_' . $img->getClientOriginalName();
                 $img->move('covers/berita', $name);
@@ -64,6 +68,7 @@ class ArtikelController extends Controller
             }
     
             $berita->save();
+            return redirect()->route('berita.index');
     }
 
     /**
@@ -74,7 +79,14 @@ class ArtikelController extends Controller
      */
     public function show($id)
     {
-        //
+         $kategori = Kategori::all();
+        return view('berita.create', compact('kategori'));
+    }
+    public function read($id)
+    {
+        $berita = Artikel::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('tampilan', compact('berita','kategori'));
     }
 
     /**
@@ -85,7 +97,9 @@ class ArtikelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berita = Artikel::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('berita.edit', compact('berita','kategori'));
     }
 
     /**
@@ -97,7 +111,26 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $berita = Artikel::findOrFail($id);
+        $berita->judul = $request->judul;
+        $berita->isi = $request->isi;
+        $berita->tanggal = $request->tanggal;
+        $berita->id_kategori = $request->id_kategori;
+
+        if ($request->hasFile('cover')) {
+            $berita->deleteImage();
+            $img = $request->file('cover');
+            $name = rand(1000, 9999) . '_' . $img->getClientOriginalName();
+            $img->move('covers/berita', $name);
+    
+            $berita->cover = $name;
+        } else {
+
+            $berita->cover = null;
+        }
+
+        $berita->save();
+        return redirect()->route('berita.index');
     }
 
     /**
@@ -108,6 +141,8 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $berita = Artikel::findOrFail($id);
+        $berita->delete();
+        return redirect()->route('berita.index');
     }
 }

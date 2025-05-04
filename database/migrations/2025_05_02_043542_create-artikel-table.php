@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('cover');
             $table->string('judul');
-            $table->string('isi');
+            $table->longText('isi');
             $table->date('tanggal');
             $table->unsignedBigInteger('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategori')->onDelete('cascade');

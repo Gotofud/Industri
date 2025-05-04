@@ -20,13 +20,13 @@
                          <div class="card mx-5" style="width: 18rem;">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total Berita</h5>
-                            <h1>sa</h1>
+                            <h1>{{ $totalBerita }}</h1>
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total Kategori</h5>
-                            <h1>sa</h1>
+                            <h1>{{ $totalKategori }}</h1>
                         </div>
                     </div>
                     </div>

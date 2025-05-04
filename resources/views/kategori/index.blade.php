@@ -18,14 +18,11 @@
 
                     <div class="container mt-3">
                         <table class="table">
-                            <a href="{{ route('berita.create') }}" class="btn btn-success">Tambah Berita</a>
+                            <a href="{{ route('kategori.create') }}" class="btn btn-success">Tambah kategori</a>
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Kategori</th>
-                                    <th scope="col">Cover</th>
-                                    <th scope="col">Judul</th>
-                                    <th scope="col">Isi</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -33,17 +30,13 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($berita as $data)
+                                @foreach ($kategori as $data)
                                     <tr>
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td>{{ $data->Kategori->nama_kategori }}</td>
-                                        <td><img src="{{ asset('covers/berita/' . $data->cover) }}" alt="" width="40px"
-                                                height="40px"></td>
-                                        <td>{{ $data->judul }}</td>
-                                        <td>{{ $data->isi }}</td>
+                                        <td>{{ $data->nama_kategori }}</td>
                                         <td>
-                                            <form action="{{route('berita.destroy', $data->id)}}" method="POST">
-                                                <a href="{{route('berita.edit', $data->id)}}"
+                                            <form action="{{route('kategori.destroy', $data->id)}}" method="POST">
+                                                <a href="{{route('kategori.edit', $data->id)}}"
                                                     class="btn btn-sm btn-success">Edit</a>
                                                 @csrf
                                                 @method('DELETE')

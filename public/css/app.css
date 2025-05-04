@@ -1,4 +1,26 @@
-.crd-1 img{
-    filter: grayscale(45%);
-}
+.featured-post {
+    background-color: #f8f9fa;
+    padding: 40px;
+    border-radius: 10px;
+  }
 
+  .featured-post img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .card-title {
+    font-weight: bold;
+  }
+
+  img.logo {
+    max-width:100%;
+    max-block-size: 100px;
+  }
