@@ -1,14 +1,16 @@
 @include('layouts.admin.head')
 @include('layouts.admin.navbar')
 
-
 <div class="container mt-5">
-
     <div class="row justify-content-center">
         @include('layouts.admin.sidebar')
-        <div class="col-md-8">
-            <div class="card bg-dark text-white" style="height: auto; width: 55rem;">
-                <div class="card-header">{{ __('Dashboard Admin') }}</div>
+        <div class="col-md-9">
+            <div class="card bg-dark text-white" style="width: 100%;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Dashboard Admin') }}</h5>
+                    <a href="{{ route('berita.create') }}" class="btn btn-success btn-sm">Tambah Berita</a>
+                </div>
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -16,35 +18,35 @@
                         </div>
                     @endif
 
-                    <div class="container mt-3">
-                        <table class="table">
-                            <a href="{{ route('berita.create') }}" class="btn btn-success">Tambah Berita</a>
-                            <thead>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-striped table-bordered text-white align-middle">
+                            <thead class="table-light text-dark">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Kategori</th>
-                                    <th scope="col">Cover</th>
-                                    <th scope="col">Judul</th>
-                                    <th scope="col">Isi</th>
-                                    <th scope="col">Aksi</th>
+                                    <th>#</th>
+                                    <th>Kategori</th>
+                                    <th>Cover</th>
+                                    <th>Judul</th>
+                                    <th>Isi</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $no = 1;
-                                @endphp
+                                @php $no = 1; @endphp
                                 @foreach ($berita as $data)
                                     <tr>
-                                        <th scope="row">{{ $no++ }}</th>
+                                        <td>{{ $no++ }}</td>
                                         <td>{{ $data->Kategori->nama_kategori }}</td>
-                                        <td><img src="{{ asset('covers/berita/' . $data->cover) }}" alt="" width="40px"
-                                                height="40px"></td>
-                                        <td>{{ $data->judul }}</td>
-                                        <td>{{ $data->isi }}</td>
                                         <td>
-                                            <form action="{{route('berita.destroy', $data->id)}}" method="POST">
-                                                <a href="{{route('berita.edit', $data->id)}}"
-                                                    class="btn btn-sm btn-success">Edit</a>
+                                            <img src="{{ asset('covers/berita/' . $data->cover) }}" alt="cover"
+                                                 class="img-thumbnail" width="60" height="60">
+                                        </td>
+                                        <td>{{ $data->judul }}</td>
+                                        <td title="{{ $data->isi }}" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $data->isi }}
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('berita.destroy', $data->id) }}" method="POST" class="d-inline">
+                                                <a href="{{ route('berita.edit', $data->id) }}" class="btn btn-sm btn-success">Edit</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger"
@@ -57,6 +59,7 @@
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

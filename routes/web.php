@@ -23,8 +23,8 @@ use App\Http\Controllers\KategoriController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
-Route::get('/dashboard', [MainController::class, 'index'])->name('dashboard');
+Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('welcome');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::resource('berita', ArtikelController::class);
 Route::get('/tampilan/{id}', [ArtikelController::class, 'read'])->name('berita.read');
 Route::resource('kategori', KategoriController::class);

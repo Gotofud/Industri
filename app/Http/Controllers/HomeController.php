@@ -25,10 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $berita = Artikel::all();
-        $kategori = Kategori::all();
-        $artikel = Artikel::take(2)->get();
-        $utama = Artikel::take(1)->get();
-        return view('welcome', compact('berita', 'artikel','utama','kategori'));
+       
+        $totalBerita = Artikel::count();
+        $totalKategori = Kategori::count();
+        return view('dashboard', compact('totalBerita', 'totalKategori'));
     }
 }

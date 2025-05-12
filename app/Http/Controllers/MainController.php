@@ -15,11 +15,11 @@ class MainController extends Controller
      */
     public function index()
     {
-    
-        $totalBerita = Artikel::count();
-        $totalKategori = Kategori::count();
-        return view('dashboard', compact('totalBerita', 'totalKategori'));
-
+        $berita = Artikel::all();
+        $kategori = Kategori::all();
+        $artikel = Artikel::take(2)->get();
+        $utama = Artikel::take(1)->get();
+        return view('welcome', compact('berita', 'artikel', 'utama', 'kategori'));
     }
 
     /**
